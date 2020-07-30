@@ -40,9 +40,7 @@ go build
 `firstly, edit conn.go presto_dsn and mysql connect config`
 
 ```
-GOPATH
 
-当前依赖:
 go get -v github.com/go-sql-driver/mysql
 go get -v github.com/prestodb/presto-go-client/presto
 
