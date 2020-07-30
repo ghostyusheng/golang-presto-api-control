@@ -6,7 +6,14 @@
 
 #### 部署说明 
 ```
-记得修改conn.go presto_dsn 和 mysql 连接配置
+1.记得修改conn.go presto_dsn 和 mysql 连接配置
+2.mysql 登录:
+  CREATE DATABASE `go_interface`;
+  CREATE TABLE `access` (
+  `ak` varchar(255) NOT NULL,
+  `tables` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`ak`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 GOPATH必须包含你下过的github包
 
@@ -30,7 +37,55 @@ MACOS编译命令
 go build
 ```
 
+#### 增删查改/CURD API DEMO
+```
+curl -X POST \
+  http://127.0.0.1:8088/create \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"dest": "hive",
+	"table": "testDemo",
+	"primary": "country",
+	"option": "create",
+	"fields": ["user_id", "view_time", "page_url", "ds", "country"],
+	"ak": "xd_search"
+}'
+
+curl -X POST \
+  http://127.0.0.1:8088/query \
+  -H 'Content-Type: application/json' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"dest": "hive",
+	"option": "query",
+	"sql": "select vn_code,md from (select * from testDemo limit 100)t where t.vn_code ='\''624'\''",
+	"ak": "xd_search"
+}'
+
+curl -X POST \
+  http://127.0.0.1:8088/truncate \
+  -H 'Content-Type: application/json' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"dest": "hive",
+	"table": "testDemo",
+	"option": "truncate",
+	"ak": "xd_search"
+}'
+
+{
+	"dest": "hive",
+	"table": "testDemo",
+	"option": "insert",
+	"fields": ["user_id", "view_time", "page_url", "ds", "country"],
+	"data": [["77777","2","3","4","us"],["77777","2b","3c","4d","china"]],
+	"ak": "xd_search"
+}
+
+```
 ------------------------------------------------
+
+
 
 #### go version
 1.14
@@ -38,7 +93,15 @@ go build
 
 #### deployment
 `firstly, edit conn.go presto_dsn and mysql connect config`
-
+```
+# LOGIN MYSQL SHELL AND EXECUTE:
+  CREATE DATABASE `go_interface`;
+  
+  CREATE TABLE `access` (
+  `ak` varchar(255) NOT NULL,
+  `tables` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`ak`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
 go get -v github.com/go-sql-driver/mysql
