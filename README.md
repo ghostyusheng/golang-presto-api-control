@@ -50,10 +50,9 @@ go env -w GOPATH=$HOME/go/:~/go
 go env -w GOPATH=$HOME/bin
 
 
-
-LINUX build bin
+# LINUX build bin
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
 
-MACOS build bin
+# MACOS build bin
 go build
 ```
