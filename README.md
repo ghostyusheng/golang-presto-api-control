@@ -3,6 +3,7 @@
 #### go 版本
 1.14
 
+ak用来控制表的权限，自己创建表自己才能清空
 
 #### 部署说明 
 ```
@@ -90,6 +91,10 @@ curl -X POST \
 #### go version
 1.14
 
+#### general
+you need create ak in your mysql access table config.
+by default, who create table and the one use ak can truncate table.
+
 
 #### deployment
 `firstly, edit conn.go presto_dsn and mysql connect config`
@@ -104,18 +109,19 @@ curl -X POST \
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
+```
 go get -v github.com/go-sql-driver/mysql
 go get -v github.com/prestodb/presto-go-client/presto
 
-# GOPATH direct to your go src path, example: ~/go
+#### GOPATH direct to your go src path, example: ~/go
 go env -w GO111MODULE=auto
 go env -w GOPATH=$HOME/go/:~/go
 go env -w GOPATH=$HOME/bin
 
 
-# LINUX build bin
+#### LINUX build bin
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
 
-# MACOS build bin
+#### MACOS build bin
 go build
 ```
