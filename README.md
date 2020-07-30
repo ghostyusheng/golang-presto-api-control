@@ -6,6 +6,8 @@
 
 #### 部署说明 
 ```
+记得修改conn.go presto_dsn 和 mysql 连接配置
+
 GOPATH必须包含你下过的github包
 
 当前依赖:
@@ -35,6 +37,8 @@ go build
 
 
 #### deployment
+`firstly, edit conn.go presto_dsn and mysql connect config`
+
 ```
 GOPATH
 
