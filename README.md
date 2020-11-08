@@ -24,7 +24,7 @@ go get -v github.com/prestodb/presto-go-client/presto
 
 # 项目目录放到gopath下
 go env -w GO111MODULE=auto
-go env -w GOPATH=$HOME/go/:~/go
+go env -w GOPATH=$HOME/go/:$HOME/go
 go env -w GOPATH=$HOME/bin
 
 # 中国区可选，VPN可以不执行，默认找不到仓库会去github回源
@@ -115,7 +115,7 @@ go get -v github.com/prestodb/presto-go-client/presto
 
 #### GOPATH direct to your go src path, example: ~/go
 go env -w GO111MODULE=auto
-go env -w GOPATH=$HOME/go/:~/go
+go env -w GOPATH=$HOME/go/:$HOME/go
 go env -w GOPATH=$HOME/bin
 
 
