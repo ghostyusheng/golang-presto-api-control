@@ -1,4 +1,5 @@
-#### presto go curd api  
+#### Introduction
+A simple Presto access API written in golang, mainly used to control access to the Presto database.
 
 #### go 版本
 1.14
